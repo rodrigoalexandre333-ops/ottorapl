@@ -1,0 +1,92 @@
+[
+  {
+    "text": "Qual é a linguagem de programação mais utilizada para desenvolvimento web frontend?",
+    "options": ["A) Python", "B) JavaScript", "C) Java", "D) C++"],
+    "correct": 1,
+    "explanation": "JavaScript é a linguagem padrão para desenvolvimento web frontend, executando diretamente nos navegadores."
+  },
+  {
+    "text": "O que significa PWA (Progressive Web App)?",
+    "options": ["A) Uma aplicação web que funciona como app nativo", "B) Um tipo de banco de dados", "C) Uma linguagem de programação", "D) Um framework CSS"],
+    "correct": 0,
+    "explanation": "PWA é uma aplicação web que oferece experiência similar a um app nativo, com funcionalidades offline, instalação e notificações push."
+  },
+  {
+    "text": "CSS Grid é superior ao Flexbox em todos os cenários de layout.",
+    "options": ["A) Verdadeiro", "B) Falso"],
+    "correct": 1,
+    "explanation": "CSS Grid e Flexbox têm propósitos diferentes. Grid é melhor para layouts bidimensionais, enquanto Flexbox é ideal para layouts unidimensionais."
+  },
+  {
+    "text": "Qual das seguintes NÃO é uma vantagem do armazenamento local (localStorage) no navegador?",
+    "options": ["A) Persiste após o fechamento do navegador", "B) Maior capacidade que cookies", "C) Sincronização automática entre dispositivos", "D) Acesso via JavaScript"],
+    "correct": 2,
+    "explanation": "O localStorage não sincroniza automaticamente entre dispositivos - os dados ficam apenas no dispositivo local."
+  },
+  {
+    "text": "Em desenvolvimento responsivo, qual é a abordagem 'Mobile First'?",
+    "options": ["A) Desenvolver primeiro para desktop", "B) Começar com o design para mobile e expandir", "C) Usar apenas breakpoints móveis", "D) Ignorar devices desktop"],
+    "correct": 1,
+    "explanation": "Mobile First significa começar o desenvolvimento com o design para dispositivos móveis e progressivamente adicionar funcionalidades para telas maiores."
+  },
+  {
+    "text": "Qual é a principal função de um Service Worker em uma PWA?",
+    "options": ["A) Gerenciar o banco de dados", "B) Controlar requisições de rede e cache", "C) Renderizar a interface do usuário", "D) Processar formulários"],
+    "correct": 1,
+    "explanation": "Service Workers atuam como proxy entre a aplicação e a rede, controlando requisições, cache e habilitando funcionalidades offline."
+  },
+  {
+    "text": "HTML5 introduziu elementos semânticos como <header>, <nav> e <section>.",
+    "options": ["A) Verdadeiro", "B) Falso"],
+    "correct": 0,
+    "explanation": "HTML5 introduziu vários elementos semânticos para melhorar a estrutura e acessibilidade das páginas web."
+  },
+  {
+    "text": "Qual é a diferença principal entre 'let' e 'var' em JavaScript?",
+    "options": ["A) Não há diferença", "B) 'let' tem escopo de bloco, 'var' tem escopo de função", "C) 'var' é mais rápido", "D) 'let' só funciona em arrays"],
+    "correct": 1,
+    "explanation": "'let' tem escopo de bloco (block scope) e não sofre hoisting da mesma forma que 'var', que tem escopo de função."
+  },
+  {
+    "text": "Em CSS, qual propriedade é usada para criar animações?",
+    "options": ["A) transition", "B) animation", "C) transform", "D) Todas as anteriores"],
+    "correct": 3,
+    "explanation": "Todas essas propriedades podem ser usadas para criar animações: 'transition' para mudanças suaves, 'animation' para animações keyframe, e 'transform' para transformações."
+  },
+  {
+    "text": "Qual é a vantagem de usar fetch() ao invés de XMLHttpRequest?",
+    "options": ["A) Sintaxe mais limpa com Promises", "B) Melhor suporte a CORS", "C) Suporte nativo a async/await", "D) Todas as anteriores"],
+    "correct": 3,
+    "explanation": "fetch() oferece uma API mais moderna com sintaxe baseada em Promises, melhor manipulação de CORS e integração nativa com async/await."
+  },
+  {
+    "text": "O que é 'Virtual DOM' em frameworks como React?",
+    "options": ["A) Uma cópia do DOM real mantida em memória", "B) Um tipo especial de elemento HTML", "C) Uma biblioteca de animações", "D) Um banco de dados virtual"],
+    "correct": 0,
+    "explanation": "Virtual DOM é uma representação em JavaScript do DOM real, mantida em memória para otimizar atualizações na interface."
+  },
+  {
+    "text": "Websites responsivos sempre carregam mais rápido que versões desktop.",
+    "options": ["A) Verdadeiro", "B) Falso"],
+    "correct": 1,
+    "explanation": "A velocidade depende de vários fatores como otimização, tamanho das imagens, código CSS/JS, não apenas do design responsivo."
+  },
+  {
+    "text": "Qual é o propósito da tag <meta name='viewport'> em HTML?",
+    "options": ["A) Definir o título da página", "B) Controlar o zoom e escala em dispositivos móveis", "C) Adicionar palavras-chave SEO", "D) Definir o charset da página"],
+    "correct": 1,
+    "explanation": "A meta tag viewport controla como a página é exibida em dispositivos móveis, definindo largura, escala inicial e comportamento de zoom."
+  },
+  {
+    "text": "Em JavaScript moderno (ES6+), qual é a forma recomendada de declarar constantes?",
+    "options": ["A) var CONSTANT = 'value'", "B) let constant = 'value'", "C) const CONSTANT = 'value'", "D) define('CONSTANT', 'value')"],
+    "correct": 2,
+    "explanation": "A palavra-chave 'const' é usada para declarar constantes em JavaScript ES6+, criando uma ligação imutável ao valor."
+  },
+  {
+    "text": "Qual é a principal diferença entre GET e POST em requisições HTTP?",
+    "options": ["A) GET é mais seguro", "B) POST envia dados no corpo da requisição", "C) GET é mais rápido", "D) Não há diferença"],
+    "correct": 1,
+    "explanation": "GET envia dados na URL (query string) enquanto POST envia dados no corpo da requisição, sendo mais seguro para dados sensíveis."
+  }
+]

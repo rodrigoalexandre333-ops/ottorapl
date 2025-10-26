@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Pro - Web App Interativo</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Quiz Pro">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- App Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>Quiz Pro</span>
+            </div>
+            <div class="header-controls">
+                <button id="themeToggle" class="icon-btn" title="Alternar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="fullscreenBtn" class="icon-btn" title="Tela cheia">
+                    <i class="fas fa-expand"></i>
+                </button>
+                <button id="settingsBtn" class="icon-btn" title="Configurações">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="#" data-view="quiz" class="nav-link active">
+                            <i class="fas fa-play"></i> Quiz
+                        </a></li>
+                        <li><a href="#" data-view="create" class="nav-link">
+                            <i class="fas fa-plus"></i> Criar Questões
+                        </a></li>
+                        <li><a href="#" data-view="manage" class="nav-link">
+                            <i class="fas fa-folder"></i> Gerenciar
+                        </a></li>
+                        <li><a href="#" data-view="stats" class="nav-link">
+                            <i class="fas fa-chart-bar"></i> Estatísticas
+                        </a></li>
+                        <li><a href="#" data-view="export" class="nav-link">
+                            <i class="fas fa-download"></i> Exportar
+                        </a></li>
+                    </ul>
+                </nav>
+                
+                <div class="sidebar-footer">
+                    <button id="sidebarToggle" class="icon-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <div class="content-wrapper">
+            <!-- Quiz View -->
+            <section id="quizView" class="view active">
+                <div class="quiz-container">
+                    <!-- Quiz Header -->
+                    <div class="quiz-header">
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div id="progressFill" class="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span id="currentQuestion">1</span> de <span id="totalQuestions">1</span>
+                            </div>
+                        </div>
+                        <div class="quiz-timer">
+                            <i class="fas fa-clock"></i>
+                            <span id="timer">00:00</span>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Status -->
+                    <div id="status" class="quiz-status">
+                        Clique em "Iniciar Quiz" para começar
+                    </div>
+
+                    <!-- Quiz Content -->
+                    <div id="quiz" class="quiz-content"></div>
+
+                    <!-- Quiz Controls -->
+                    <div class="quiz-controls">
+                        <button id="playBtn" class="btn btn-primary">
+                            <i class="fas fa-play"></i> Iniciar Quiz
+                        </button>
+                        <button id="pauseBtn" class="btn btn-secondary" style="display: none;">
+                            <i class="fas fa-pause"></i> Pausar
+                        </button>
+                        <button id="resetBtn" class="btn btn-outline">
+                            <i class="fas fa-redo"></i> Reiniciar
+                        </button>
+                        <button id="skipBtn" class="btn btn-outline" style="display: none;">
+                            <i class="fas fa-forward"></i> Pular
+                        </button>
+                    </div>
+
+                    <!-- Mobile Controls (Portrait Mode) -->
+                    <div id="mobileControls" class="mobile-controls">
+                        <button id="importToggle" class="btn btn-secondary">
+                            <i class="fas fa-upload"></i> Importar Questões
+                        </button>
+                        <button id="exportResults" class="btn btn-secondary">
+                            <i class="fas fa-download"></i> Exportar Resultados
+                        </button>
+                    </div>
+
+                    <!-- Import Box -->
+                    <div id="importSection" class="import-section" style="display: none;">
+                        <h3><i class="fas fa-upload"></i> Importar Questões</h3>
+                        <textarea id="importBox" placeholder='Cole aqui o JSON das questões ou texto formatado'></textarea>
+                        <div class="import-controls">
+                            <button id="importConfirm" class="btn btn-primary">
+                                <i class="fas fa-check"></i> Confirmar Importação
+                            </button>
+                            <button id="importCancel" class="btn btn-outline">
+                                <i class="fas fa-times"></i> Cancelar
+                            </button>
+                        </div>
+                        <div class="import-help">
+                            <p><strong>Formato JSON:</strong></p>
+                            <code>[{"text":"Pergunta?","options":["A) Opção 1","B) Opção 2"],"correct":0,"explanation":"Explicação"}]</code>
+                        </div>
+                    </div>
+
+                    <!-- Results Summary -->
+                    <div id="resultsSummary" class="results-summary"></div>
+                </div>
+            </section>
+
+            <!-- Create Questions View -->
+            <section id="createView" class="view">
+                <div class="create-container">
+                    <h2><i class="fas fa-plus"></i> Criar Nova Questão</h2>
+                    
+                    <form id="questionForm" class="question-form">
+                        <div class="form-group">
+                            <label for="questionText">Pergunta:</label>
+                            <textarea id="questionText" placeholder="Digite sua pergunta aqui..." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tipo de Questão:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="questionType" value="multiple" checked>
+                                    <span>Múltipla Escolha</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="questionType" value="boolean">
+                                    <span>Verdadeiro/Falso</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="questionType" value="open">
+                                    <span>Resposta Aberta</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="optionsContainer" class="form-group">
+                            <label>Opções de Resposta:</label>
+                            <div id="optionsList" class="options-list">
+                                <!-- Options will be added dynamically -->
+                            </div>
+                            <button type="button" id="addOption" class="btn btn-outline">
+                                <i class="fas fa-plus"></i> Adicionar Opção
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="explanation">Explicação (opcional):</label>
+                            <textarea id="explanation" placeholder="Explique a resposta correta..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="difficulty">Dificuldade:</label>
+                            <select id="difficulty">
+                                <option value="easy">Fácil</option>
+                                <option value="medium" selected>Médio</option>
+                                <option value="hard">Difícil</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Categoria:</label>
+                            <input type="text" id="category" placeholder="Ex: Matemática, História, etc.">
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Salvar Questão
+                            </button>
+                            <button type="reset" class="btn btn-outline">
+                                <i class="fas fa-eraser"></i> Limpar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Other views will be added here -->
+            <section id="manageView" class="view">
+                <div class="manage-container">
+                    <h2><i class="fas fa-folder"></i> Gerenciar Questões</h2>
+                    <div id="questionsList" class="questions-list"></div>
+                </div>
+            </section>
+
+            <section id="statsView" class="view">
+                <div class="stats-container">
+                    <h2><i class="fas fa-chart-bar"></i> Estatísticas de Performance</h2>
+                    <div id="statsContent"></div>
+                </div>
+            </section>
+
+            <section id="exportView" class="view">
+                <div class="export-container">
+                    <h2><i class="fas fa-download"></i> Exportar Dados</h2>
+                    <div id="exportContent"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Feedback Overlay -->
+    <div id="feedbackOverlay" class="feedback-overlay">
+        <div class="feedback-content">
+            <div id="feedbackMessage"></div>
+            <button id="feedbackClose" class="btn btn-outline">
+                <i class="fas fa-times"></i> Fechar
+            </button>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-cog"></i> Configurações</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-group">
+                    <h4>Quiz</h4>
+                    <label class="switch-label">
+                        <input type="checkbox" id="autoNextQuestion">
+                        <span class="switch"></span>
+                        Próxima questão automática
+                    </label>
+                    <label class="switch-label">
+                        <input type="checkbox" id="showTimer" checked>
+                        <span class="switch"></span>
+                        Mostrar cronômetro
+                    </label>
+                    <label class="switch-label">
+                        <input type="checkbox" id="randomizeQuestions">
+                        <span class="switch"></span>
+                        Embaralhar questões
+                    </label>
+                </div>
+                
+                <div class="settings-group">
+                    <h4>Tempo</h4>
+                    <label>Tempo por questão (segundos):</label>
+                    <input type="number" id="questionTime" value="30" min="10" max="300">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/creator.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/stats.js"></script>
+    <script src="js/pwa.js"></script>
+</body>
+</html>
